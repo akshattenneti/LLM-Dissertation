@@ -1,0 +1,4267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Law in Bioinformatics & Genetic Data | Dissertation Presentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #16a085;
+            --accent: #e74c3c;
+            --bg-dark: #1a2639;
+            --bg-light: #f5f7fa;
+            --text-light: #ecf0f1;
+            --text-dark: #2c3e50;
+            --highlight: #3498db;
+            --card-bg: rgba(236, 240, 241, 0.95);
+            --card-border: rgba(52, 152, 219, 0.3);
+            --gradient-start: #2c3e50;
+            --gradient-end: #1a2639;
+            --section-dark-bg: #243447;
+            --section-light-bg: #edf2f7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e6f7fc 100%);
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 3px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 1.5rem;
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-top: 1.2rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        section {
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        /* Header */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(26, 38, 57, 0.85), rgba(26, 38, 57, 0.95));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            z-index: 2;
+            max-width: 900px;
+            padding: 2rem;
+            border-radius: 8px;
+            background-color: rgba(26, 38, 57, 0.6);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .header-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: var(--text-light);
+        }
+        
+        .header-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            opacity: 0.9;
+        }
+        
+        .author-info {
+            margin-top: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .header-badge {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0.3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-down:hover {
+            color: var(--secondary);
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(26, 38, 57, 0.95);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            transform: translateY(-100%);
+        }
+        
+        nav.visible {
+            transform: translateY(0);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .nav-logo:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 1rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-nav-toggle {
+            display: none;
+            color: var(--text-light);
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Content Sections */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            display: inline-block;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
+            min-height: 250px; /* Ensure consistent height */
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-icon {
+            background-color: var(--secondary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .card-title {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+        
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--card-bg);
+            top: calc(50% - 10px);
+            right: -10px;
+            transform: rotate(45deg);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--card-bg);
+            top: calc(50% - 10px);
+            left: -10px;
+            transform: rotate(45deg);
+        }
+        
+        .timeline-date {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            top: calc(50% - 12.5px);
+            right: -12.5px;
+            z-index: 1;
+            box-shadow: 0 0 0 4px rgba(22, 160, 133, 0.2);
+        }
+        
+        .timeline-item:nth-child(even)::before {
+            left: -12.5px;
+        }
+        
+        /* Highlight Boxes */
+        .highlight-box {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--highlight);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .highlight-box h4 {
+            color: var(--highlight);
+            margin-top: 0;
+        }
+        
+        /* Quote Boxes */
+        .quote-box {
+            position: relative;
+            font-style: italic;
+            background-color: rgba(236, 240, 241, 0.7);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: 0;
+            left: 10px;
+            font-size: 4rem;
+            color: rgba(52, 152, 219, 0.2);
+            font-family: Georgia, serif;
+        }
+        
+        .quote-source {
+            display: block;
+            text-align: right;
+            font-style: normal;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        
+        /* Tabs */
+        .tabs {
+            margin: 2rem 0;
+        }
+        
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab-btn {
+            padding: 0.7rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--text-dark);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .tab-btn:hover {
+            background-color: rgba(22, 160, 133, 0.1);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 2rem 0;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Accordion */
+        .accordion {
+            margin: 2rem 0;
+        }
+        
+        .accordion-item {
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .accordion-header {
+            background-color: var(--card-bg);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .accordion-header:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .accordion-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .accordion-content {
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .accordion-content-inner {
+            padding: 1.5rem;
+        }
+        
+        .accordion-item.active .accordion-header {
+            background-color: rgba(52, 152, 219, 0.15);
+        }
+        
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 1000px;
+            transition: max-height 1s ease-in;
+        }
+        
+        /* Table */
+        .table-container {
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background-color: white;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-info {
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* DNA Animation */
+        .dna-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .dna-helix {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/QG1jlnM.png');
+            background-size: contain;
+            background-repeat: repeat;
+            opacity: 0.1;
+            animation: moveDNA 20s linear infinite;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(22, 160, 133, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background-color: #138a72;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(22, 160, 133, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(22, 160, 133, 0.2);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-30px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-15px) translateX(-50%);
+            }
+        }
+        
+        @keyframes moveDNA {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+        
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-1 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mb-2 {
+            margin-bottom: 1rem;
+        }
+        
+        .mb-3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 2rem;
+        }
+        
+        .mt-1 {
+            margin-top: 0.5rem;
+        }
+        
+        .mt-2 {
+            margin-top: 1rem;
+        }
+        
+        .mt-3 {
+            margin-top: 1.5rem;
+        }
+        
+        .mt-4 {
+            margin-top: 2rem;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Case Study Box */
+        .case-study {
+            background-color: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--highlight);
+        }
+        
+        .case-study-title {
+            margin-top: 0;
+            color: var(--highlight);
+            font-size: 1.3rem;
+        }
+        
+        .case-study-meta {
+            display: flex;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .case-study-meta span {
+            display: flex;
+            align-items: center;
+            margin-right: 1.5rem;
+        }
+        
+        .case-study-meta i {
+            margin-right: 0.5rem;
+            color: var(--highlight);
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            border-bottom: 1px dotted var(--primary);
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--primary);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--primary) transparent transparent transparent;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Information Blocks */
+        .info-block {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .info-block i {
+            font-size: 1.5rem;
+            color: var(--highlight);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+        }
+        
+        .info-block-content {
+            flex: 1;
+        }
+        
+        .info-block-title {
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--highlight);
+        }
+        
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: rgba(236, 240, 241, 0.5);
+        }
+        
+        .comparison-table td:first-child {
+            font-weight: 600;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        /* List Styles */
+        .custom-list {
+            list-style: none;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .custom-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .custom-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+        }
+        
+        .numbered-list {
+            list-style: none;
+            counter-reset: list-counter;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .numbered-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            counter-increment: list-counter;
+        }
+        
+        .numbered-list li::before {
+            content: counter(list-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::before {
+                left: 18px;
+                right: auto;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            .header-title {
+                font-size: 2.2rem;
+            }
+            
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.7rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .header-title {
+                font-size: 1.8rem;
+            }
+            
+            .header-subtitle {
+                font-size: 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                padding-left: 50px;
+            }
+            
+            .comparison-table {
+                font-size: 0.8rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.5rem;
+            }
+        }
+        
+        /* DNA Animation - Enhanced */
+        .dna-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .dna-strand {
+            position: absolute;
+            width: 20px;
+            height: 100%;
+            opacity: 0.7;
+            z-index: 1;
+        }
+        
+        .dna-pair {
+            position: absolute;
+            width: 20px;
+            height: 8px;
+            border-radius: 4px;
+            z-index: 1;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes floatDNA {
+            0% {
+                transform: translateY(-100%) rotateY(0deg);
+            }
+            50% {
+                transform: translateY(0%) rotateY(180deg);
+            }
+            100% {
+                transform: translateY(100%) rotateY(360deg);
+            }
+        }
+        
+        /* Interactive Element - Slider */
+        .slider-container {
+            width: 100%;
+            margin: 2rem 0;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 5px;
+            border-radius: 5px;
+            background-color: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(22, 160, 133, 0.5);
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        
+        .slider-value {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        /* Interactive Element - Toggle Switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .toggle-label {
+            margin: 0 1rem;
+            font-weight: 600;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--secondary);
+        }
+        
+        input:focus + .toggle-slider {
+            box-shadow: 0 0 1px var(--secondary);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Special Sections */
+        .special-section {
+            background: linear-gradient(135deg, var(--section-dark-bg) 0%, var(--bg-dark) 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .special-section .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-left: 4px solid var(--highlight);
+        }
+        
+        .special-section h3, 
+        .special-section h4 {
+            color: white;
+        }
+        
+        .special-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 200px;
+            background-repeat: repeat;
+            opacity: 0.05;
+        }
+        
+        .special-section .section-title h2 {
+            color: white;
+        }
+        
+        .special-section .section-title h2::after {
+            background-color: white;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1050;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        .modal-close {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: var(--accent);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #ddd;
+            text-align: right;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .preloader.fade {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .dna-loader {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            perspective: 800px;
+        }
+        
+        .dna-loader-strand {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--secondary);
+            border-bottom-color: var(--highlight);
+            animation: rotateDNA 1.5s linear infinite;
+        }
+        
+        .dna-loader-strand:nth-child(1) {
+            animation-delay: -0.5s;
+        }
+        
+        .dna-loader-strand:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            animation-delay: -0.4s;
+        }
+        
+        .dna-loader-strand:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            animation-delay: -0.3s;
+        }
+        
+        @keyframes rotateDNA {
+            0% {
+                transform: rotateY(0deg) rotateX(0deg);
+            }
+            100% {
+                transform: rotateY(360deg) rotateX(360deg);
+            }
+        }
+        
+        /* Flip Card */
+        .flip-card {
+            perspective: 1000px;
+            height: 300px;
+            margin: 2rem 0;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .flip-card-front {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .flip-card-back {
+            background-color: var(--primary);
+            color: white;
+            transform: rotateY(180deg);
+            border-left: 4px solid var(--highlight);
+        }
+        
+        .flip-card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .flip-card-back .flip-card-title {
+            color: white;
+        }
+        
+        /* Interactive SVG */
+        .interactive-svg-container {
+            width: 100%;
+            height: 400px;
+            margin: 2rem 0;
+            position: relative;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .balance-beam {
+            cursor: pointer;
+            transition: transform 1s ease;
+        }
+        
+        .balance-text {
+            font-size: 14px;
+            font-weight: bold;
+            text-anchor: middle;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--secondary);
+            width: 0;
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+        
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Citations */
+        .citation {
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            opacity: 0.7;
+            margin-top: 0.5rem;
+        }
+        
+        .citation a {
+            color: var(--highlight);
+            text-decoration: none;
+        }
+        
+        .citation a:hover {
+            text-decoration: underline;
+        }
+    </style>
+<style id="contrast-fixes">
+
+/* === Contrast & Spacing Fixes (2025‑05‑09) === */
+.special-section .card,
+.special-section .card * {
+  color: var(--text-dark) !important;
+}
+
+.special-section .tab-btn {
+  color: var(--text-light);
+}
+.special-section .tab-btn.active {
+  color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.card { color: var(--text-dark); }
+
+.grid { gap: 3rem; }
+.grid .card { height: 100%; }
+
+.interactive-svg-container { display: none !important; }
+
+.timeline-date {
+  background: var(--secondary);
+  color:#fff;
+}
+
+</style>
+
+<!-- IBM Plex fonts -->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style id="lab-skin">
+
+/* === Bioinformatics Lab Aesthetic (2025‑05‑09) === */
+body{
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  background:#0e1a2b;
+  color:#e8f4ff;
+}
+h1,h2,h3,h4,h5,h6,.nav-logo{
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:600;
+  letter-spacing:-.5px;
+  color:#ffffff;
+}
+code,kbd,pre,.timeline-date{
+  font-family:'IBM Plex Mono',monospace;
+}
+a{
+  color:#2af5ff;
+}
+a:hover{
+  color:#ff6fe5;
+}
+
+/* Card facelift */
+.card{
+  background:rgba(19,35,58,.92);
+  border:1px solid rgba(42,245,255,.1);
+  box-shadow:0 0 0 1px rgba(42,245,255,.06),0 4px 18px rgba(0,0,0,.5);
+  transition:transform .4s ease, box-shadow .4s ease;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 0 1px rgba(42,245,255,.25),0 14px 28px rgba(0,0,0,.8);
+}
+
+/* Navbar glass effect */
+#main-nav{
+  background:rgba(14,22,33,.8);
+  backdrop-filter:blur(14px);
+}
+
+/* Accent buttons / badges */
+.btn,.header-badge,.tab-btn.active{
+  background:#2af5ff;
+  color:#0e1a2b !important;
+}
+.btn:hover{
+  background:#ff6fe5;
+  color:#0e1a2b!important;
+}
+
+/* DNA scrolling backdrop */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(circle at 20% 40%, transparent 0 35%, #ff6fe5 36% 38%, transparent 39%),
+    radial-gradient(circle at 80% 60%, transparent 0 35%, #2af5ff 36% 38%, transparent 39%);
+  background-size:10rem 220%;
+  opacity:.05;
+  animation:helixMove 40s linear infinite;
+  pointer-events:none;
+}
+@keyframes helixMove{
+  from{background-position:0 0;}
+  to{background-position:0 -220%;}
+}
+
+/* Tabs and timeline tweaks for readability */
+.tab-btn{color:#e8f4ff;}
+.tab-btn.active{color:#0e1a2b!important;}
+
+.timeline-date{
+  background:#ff6fe5;
+}
+
+/* Back-to-top button */
+.back-to-top{
+  background:#2af5ff!important;
+  color:#0e1a2b!important;
+}
+.back-to-top:hover{
+  background:#ff6fe5!important;
+}
+
+/* Improve section headings underline */
+.section-title h2{
+  border-bottom:2px solid #ff6fe5;
+  display:inline-block;
+  padding-bottom:.25em;
+}
+
+/* Inputs slider track color */
+input[type=range]::-webkit-slider-thumb{
+  background:#2af5ff;
+}
+
+</style>
+<style id="contrast-smart">
+
+/* === Terminal‑style Contrast + Responsive Card Grid (2025‑05‑09b) === */
+body{
+  background-color:#08111f;
+  color:#c6d4ef;
+}
+/* overlay subtle horizontal scanlines */
+body::after{
+  content:'';
+  position:fixed; inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size:100% 4px;
+  pointer-events:none;
+}
+/* universal link hover neon */
+a:hover{
+  text-shadow:0 0 6px #2af5ff;
+}
+
+/* cards – make text bright against dark card */
+.card, .card *{
+  color:#cfe4ff !important;
+}
+
+/* Accordion titles */
+details summary{
+  color:#cfe4ff;
+}
+/* Accordion panel bg dark */
+details[open] > .content, .accordion .content{
+  background:#0c1a2c !important;
+}
+
+/* table readability */
+table{
+  background:#0c1a20;
+  color:#cfe4ff;
+}
+table th{
+  background:#14233a;
+  color:#f5faff;
+}
+table tr:nth-child(even){
+  background:#0f1d2e;
+}
+
+/* improved grid to fill horizontal space */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:2rem;
+}
+
+/* Numbered bullet icons brighter */
+.card li::marker{
+  color:#2af5ff;
+}
+
+/* Accent headings underline neon */
+.section-title h2{
+  border-bottom:2px solid #2af5ff;
+}
+
+/* fix timeline card text colour */
+.timeline-card, .timeline-card *{
+  color:#14233a !important; /* white card variant stays dark text */
+}
+
+</style>
+<style id="pop-contrast">
+
+/* === High‑Contrast Pop‑downs & White‑card Override (2025‑05‑09c) === */
+details[open]   ,
+details[open] * ,
+.accordion      ,
+.accordion *    ,
+.pop-sec        ,
+.pop-sec *      ,
+.card[style*="f5f7fa"],
+.card[style*="ecf0f1"],
+.card.timeline-card {
+  background:#0c1a2c !important;
+  color:#e9f4ff !important;
+}
+
+table{
+  background:#0c1a2c !important;
+  color:#e9f4ff !important;
+}
+table th{
+  background:#13233a !important;
+  color:#ffffff !important;
+}
+
+</style>
+<style id="timeline-contrast">
+
+/* === Final Contrast Patch for Timeline & Hover Cards (2025‑05‑09d) === */
+
+/* Force timeline cards to inherit dark background + bright text */
+.timeline-card,
+.timeline-card *,
+.vertical-timeline-element-content,
+.vertical-timeline-element-content *{
+  background:#0c1a2c !important;
+  color:#e9f4ff !important;
+}
+
+/* Flip‑hover "Open Science Principles" cards */
+.flip-card,
+.flip-card .front,
+.flip-card .back,
+.hover-card,
+.hover-card *{
+  background:#0c1a2c !important;
+  color:#e9f4ff !important;
+}
+
+/* keep year badges/pills visible */
+.timeline-date,
+.year-pill,
+.time-pill{
+  background:#ff6fe5 !important;
+  color:#0e1a2b !important;
+}
+
+</style>
+<style id="ultimate-contrast">
+
+/* === Ultimate Contrast Override (timeline & flip) 2025‑05‑09e === */
+.vertical-timeline-element,
+.vertical-timeline-element *{
+  color:#e9f4ff !important;
+}
+.vertical-timeline-element .vertical-timeline-element-content,
+.vertical-timeline-element .vertical-timeline-element-content *{
+  background:#0c1a2c !important;
+  color:#e9f4ff !important;
+  border-color:#2af5ff !important;
+}
+/* ensure timeline arrow diamond visible */
+.vertical-timeline-element .vertical-timeline-element-content::after{
+  border-left-color:#0c1a2c !important;
+}
+
+/* Flip / Hover cards */
+.flip-card,
+.flip-card *,
+.hover-card,
+.hover-card *,
+.card-hover,
+.card-hover *{
+  background:#0c1a2c !important;
+  color:#e9f4ff !important;
+}
+
+/* Front/back specific */
+.flip-card-front,
+.flip-card-back{
+  background:#0c1a2c !important;
+  color:#e9f4ff !important;
+}
+
+/* keep accent labels */
+.timeline-badge, .vertical-timeline-element-date,
+.flip-label{
+  background:#ff6fe5 !important;
+  color:#0e1a2b !important;
+}
+
+</style>
+<style id="timeline-white">
+
+/* === High‑Legibility Timeline (white card + dark text) 2025‑05‑09g === */
+.vertical-timeline-element-content{
+  background:#f2f4f7 !important;       /* soft white */
+  color:#1a1f2a !important;            /* dark slate text */
+  border:1px solid rgba(0,0,0,.05) !important;
+}
+.vertical-timeline-element-content *,
+.timeline-card, .timeline-card *{
+  color:#1a1f2a !important;
+}
+.vertical-timeline-element-content::after{
+  border-left:9px solid #f2f4f7 !important;
+  border-top:9px solid transparent!important;
+  border-bottom:9px solid transparent!important;
+}
+
+</style>
+<style id="timeline-final-contrast">
+
+/* === TIMELINE FINAL CONTRAST FIX (2025‑05‑09h) === */
+.vertical-timeline-element-content,
+.vertical-timeline-element-content * {
+  background:#FFFFFF !important;   /* pure white */
+  color:#111111 !important;        /* near‑black text */
+}
+.vertical-timeline-element-content h2,
+.vertical-timeline-element-content h3,
+.vertical-timeline-element-content h4,
+.vertical-timeline-element-content h5,
+.vertical-timeline-element-content h6 {
+  color:#111111 !important;
+  font-weight:700;
+}
+.vertical-timeline-element-content::after{
+  border-left:9px solid #FFFFFF !important;
+  border-top:9px solid transparent !important;
+  border-bottom:9px solid transparent !important;
+}
+
+</style>
+<style id="dynamic-enhancements">
+
+/* === Dynamic Enhancements (2025‑05‑09i) === */
+
+/* smooth scroll */
+html{scroll-behavior:smooth;}
+
+/* helix background */
+#helix-bg{
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  pointer-events:none;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" fill="none" stroke="%232af5ff" stroke-width="2"><path d="M0 200 Q100 100 200 200 T400 200" /><path d="M0 200 Q100 300 200 200 T400 200" stroke="%23ff6fe5"/></svg>');
+  background-size:600px 600px;
+  animation:helixRotate 40s linear infinite;
+  opacity:0.03;
+}
+@keyframes helixRotate{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+/* theme variables */
+:root{
+  --bg-dark:#08111f;
+  --fg-dark:#cfe4ff;
+  --card-dark:#0c1a2c;
+  --bg-light:#f8fafc;
+  --fg-light:#14233a;
+  --card-light:#ffffff;
+}
+body[data-theme="light"]{
+  background:var(--bg-light);
+  color:var(--fg-light);
+}
+body[data-theme="light"] .card,
+body[data-theme="light"] .vertical-timeline-element-content{
+  background:var(--card-light)!important;
+  color:var(--fg-light)!important;
+}
+body[data-theme="light"] nav,
+body[data-theme="light"] #main-nav{
+  background:rgba(255,255,255,.9);
+}
+body[data-theme="light"] a{color:#0076ff;}
+body[data-theme="light"] .btn{background:#0076ff!important;color:#fff!important;}
+
+/* mobile grid tweak */
+@media(max-width:600px){
+  .grid{grid-template-columns:1fr!important;}
+}
+
+</style>
+<style id="visible-toggle">
+
+/* === Visible floating theme toggle & enhanced helix (2025‑05‑10) === */
+.theme-toggle{
+  position:fixed;
+  top:1rem; right:1rem;
+  width:48px; height:48px;
+  border-radius:50%;
+  background:#2af5ff;
+  color:#08111f;
+  font-size:1.4rem;
+  display:flex;align-items:center;justify-content:center;
+  border:none;cursor:pointer;z-index:1000;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+  transition:background .3s ease, transform .3s ease;
+}
+.theme-toggle:hover{transform:scale(1.1);}
+body[data-theme="light"] .theme-toggle{background:#0076ff;color:#fff;}
+
+/* helix becomes subtle wave pattern that parallax‑scrolls */
+#helix-bg{
+  opacity:0.06;
+  animation:none;
+  background-size:800px 800px;
+  will-change:transform;
+}
+
+</style>
+<style id="helix-tweak">
+
+/* === Improved Helix / Theme Toggle Functionality (2025‑05‑10b) === */
+#helix-bg{
+  background-repeat:repeat-y;
+}
+
+</style>
+<style id="theme-selectors">
+
+/* === Theme selectors adjusted to apply to [data-theme="light"] anywhere === */
+[data-theme="light"]{
+  background:var(--bg-light);
+  color:var(--fg-light);
+}
+[data-theme="light"] .card,
+[data-theme="light"] .vertical-timeline-element-content{
+  background:var(--card-light)!important;
+  color:var(--fg-light)!important;
+}
+[data-theme="light"] nav,
+[data-theme="light"] #main-nav{
+  background:rgba(255,255,255,.9);
+}
+[data-theme="light"] a{color:#0076ff;}
+[data-theme="light"] .btn{background:#0076ff!important;color:#fff!important;}
+
+</style>
+
+<!-- COMPREHENSIVE CONTRAST OPTIMIZATION -->
+<style id="comprehensive-contrast">
+/* === Comprehensive Contrast Fixes (2025‑05‑10) === */
+
+/* Core Colors for Light and Dark Themes */
+:root {
+  /* Dark Mode Variables */
+  --dm-bg: #08111f;
+  --dm-text: #e8f4ff;
+  --dm-card-bg: #0c1a2c;
+  --dm-card-text: #e9f4ff; 
+  --dm-heading: #ffffff;
+  --dm-accent: #2af5ff;
+  --dm-accent2: #ff6fe5;
+  --dm-link: #2af5ff;
+  --dm-link-hover: #ff6fe5;
+  
+  /* Light Mode Variables */
+  --lm-bg: #f8fafc;
+  --lm-text: #14233a;
+  --lm-card-bg: #ffffff;
+  --lm-card-text: #14233a;
+  --lm-heading: #0e1a2b;
+  --lm-accent: #0076ff;
+  --lm-accent2: #d6006e;
+  --lm-link: #0076ff;
+  --lm-link-hover: #d6006e;
+  
+  /* Shared Components */
+  --timeline-light-bg: #ffffff;
+  --timeline-light-text: #0e1a2b;
+  --timeline-dark-bg: #0c1a2c;
+  --timeline-dark-text: #e9f4ff;
+}
+
+/* === 1. Base Contrast Fixes === */
+
+/* Dark theme base (default) */
+body {
+  background-color: var(--dm-bg);
+  color: var(--dm-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dm-heading);
+}
+
+a {
+  color: var(--dm-link);
+}
+
+a:hover {
+  color: var(--dm-link-hover);
+}
+
+.card {
+  background-color: var(--dm-card-bg);
+  color: var(--dm-card-text);
+}
+
+/* Light theme overrides */
+[data-theme="light"] {
+  background-color: var(--lm-bg);
+  color: var(--lm-text);
+}
+
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 {
+  color: var(--lm-heading);
+}
+
+[data-theme="light"] a {
+  color: var(--lm-link);
+}
+
+[data-theme="light"] a:hover {
+  color: var(--lm-link-hover);
+}
+
+[data-theme="light"] .card {
+  background-color: var(--lm-card-bg);
+  color: var(--lm-card-text);
+  border-color: rgba(0,118,255,.1);
+  box-shadow: 0 0 0 1px rgba(0,118,255,.06), 0 4px 18px rgba(0,0,0,.1);
+}
+
+[data-theme="light"] .card:hover {
+  box-shadow: 0 0 0 1px rgba(0,118,255,.15), 0 8px 24px rgba(0,0,0,.15);
+}
+
+/* === 2. Interactive Elements Contrast === */
+
+/* --- Accordions --- */
+.accordion-item {
+  background-color: var(--dm-card-bg);
+}
+
+.accordion-header {
+  background-color: var(--dm-card-bg);
+  color: var(--dm-card-text);
+}
+
+.accordion-content {
+  background-color: var(--dm-card-bg) !important;
+  color: var(--dm-card-text) !important;
+}
+
+.accordion-title {
+  color: var(--dm-heading);
+}
+
+[data-theme="light"] .accordion-item {
+  background-color: var(--lm-card-bg);
+}
+
+[data-theme="light"] .accordion-header {
+  background-color: var(--lm-card-bg);
+  color: var(--lm-card-text);
+}
+
+[data-theme="light"] .accordion-content {
+  background-color: var(--lm-card-bg) !important;
+  color: var(--lm-card-text) !important;
+}
+
+[data-theme="light"] .accordion-title {
+  color: var(--lm-heading);
+}
+
+[data-theme="light"] .accordion-header:hover {
+  background-color: rgba(0,118,255,.05);
+}
+
+/* --- Tabs --- */
+.tab-btn {
+  color: var(--dm-text);
+}
+
+.tab-btn.active {
+  color: var(--dm-accent);
+  border-color: var(--dm-accent);
+}
+
+.tab-btn:hover {
+  background-color: rgba(42, 245, 255, 0.1);
+}
+
+[data-theme="light"] .tab-btn {
+  color: var(--lm-text);
+}
+
+[data-theme="light"] .tab-btn.active {
+  color: var(--lm-accent);
+  border-color: var(--lm-accent);
+}
+
+[data-theme="light"] .tab-btn:hover {
+  background-color: rgba(0, 118, 255, 0.1);
+}
+
+/* --- Special Sections --- */
+.special-section {
+  background: linear-gradient(135deg, #14233a 0%, #0e1a2b 100%);
+  color: var(--dm-text);
+}
+
+.special-section h2,
+.special-section h3,
+.special-section h4 {
+  color: var(--dm-heading);
+}
+
+[data-theme="light"] .special-section {
+  background: linear-gradient(135deg, #e8f4ff 0%, #d4e4f7 100%);
+  color: var(--lm-text);
+}
+
+[data-theme="light"] .special-section h2,
+[data-theme="light"] .special-section h3,
+[data-theme="light"] .special-section h4 {
+  color: var(--lm-heading);
+}
+
+/* Special section cards need explicit contrast */
+.special-section .card {
+  background-color: var(--dm-card-bg) !important;
+  color: var(--dm-card-text) !important;
+}
+
+.special-section .card h3,
+.special-section .card h4 {
+  color: var(--dm-heading) !important;
+}
+
+[data-theme="light"] .special-section .card {
+  background-color: var(--lm-card-bg) !important;
+  color: var(--lm-card-text) !important;
+}
+
+[data-theme="light"] .special-section .card h3,
+[data-theme="light"] .special-section .card h4 {
+  color: var(--lm-heading) !important;
+}
+
+/* === 3. Timeline Specific Fixes === */
+
+/* Timeline elements - dark mode */
+.timeline-item .timeline-content {
+  background-color: var(--timeline-dark-bg);
+  color: var(--timeline-dark-text);
+}
+
+.timeline-item .timeline-content h4 {
+  color: var(--dm-heading);
+}
+
+.timeline-date {
+  background-color: var(--dm-accent2);
+  color: #0e1a2b;
+}
+
+/* Vertical timeline specific */
+.vertical-timeline-element-content,
+.vertical-timeline-element-content * {
+  background-color: var(--timeline-light-bg) !important;
+  color: var(--timeline-light-text) !important;
+}
+
+.vertical-timeline-element-content h2,
+.vertical-timeline-element-content h3,
+.vertical-timeline-element-content h4,
+.vertical-timeline-element-content h5,
+.vertical-timeline-element-content h6 {
+  color: var(--timeline-light-text) !important;
+  font-weight: 700;
+}
+
+.vertical-timeline-element-content::after {
+  border-left: 9px solid var(--timeline-light-bg) !important;
+  border-top: 9px solid transparent !important;
+  border-bottom: 9px solid transparent !important;
+}
+
+/* Light mode overrides for timeline */
+[data-theme="light"] .timeline-item .timeline-content {
+  background-color: var(--timeline-light-bg);
+  color: var(--timeline-light-text);
+}
+
+[data-theme="light"] .timeline-item .timeline-content h4 {
+  color: var(--lm-heading);
+}
+
+[data-theme="light"] .timeline-date {
+  background-color: var(--lm-accent);
+  color: #ffffff;
+}
+
+/* === 4. Highlight and Info Boxes === */
+
+/* Info blocks - dark */
+.info-block {
+  background-color: rgba(42, 245, 255, 0.1);
+  color: var(--dm-card-text);
+}
+
+.info-block-title {
+  color: var(--dm-accent);
+}
+
+.info-block i {
+  color: var(--dm-accent);
+}
+
+/* Info blocks - light */
+[data-theme="light"] .info-block {
+  background-color: rgba(0, 118, 255, 0.1);
+  color: var(--lm-card-text);
+}
+
+[data-theme="light"] .info-block-title {
+  color: var(--lm-accent);
+}
+
+[data-theme="light"] .info-block i {
+  color: var(--lm-accent);
+}
+
+/* Highlight boxes */
+.highlight-box {
+  background-color: rgba(42, 245, 255, 0.1);
+  border-left: 4px solid var(--dm-accent);
+}
+
+.highlight-box h4 {
+  color: var(--dm-accent);
+}
+
+[data-theme="light"] .highlight-box {
+  background-color: rgba(0, 118, 255, 0.1);
+  border-left: 4px solid var(--lm-accent);
+}
+
+[data-theme="light"] .highlight-box h4 {
+  color: var(--lm-accent);
+}
+
+/* Case studies */
+.case-study {
+  background-color: rgba(42, 245, 255, 0.05);
+  border-left: 4px solid var(--dm-accent);
+}
+
+.case-study-title {
+  color: var(--dm-accent);
+}
+
+.case-study-meta i {
+  color: var(--dm-accent);
+}
+
+[data-theme="light"] .case-study {
+  background-color: rgba(0, 118, 255, 0.05);
+  border-left: 4px solid var(--lm-accent);
+}
+
+[data-theme="light"] .case-study-title {
+  color: var(--lm-accent);
+}
+
+[data-theme="light"] .case-study-meta i {
+  color: var(--lm-accent);
+}
+
+/* === 5. Flip Cards Fix === */
+
+/* Dark theme flip cards */
+.flip-card-front,
+.flip-card-back {
+  background-color: var(--dm-card-bg);
+  color: var(--dm-card-text);
+}
+
+.flip-card-title {
+  color: var(--dm-heading);
+}
+
+/* Light theme flip cards */
+[data-theme="light"] .flip-card-front,
+[data-theme="light"] .flip-card-back {
+  background-color: var(--lm-card-bg);
+  color: var(--lm-card-text);
+}
+
+[data-theme="light"] .flip-card-title {
+  color: var(--lm-heading);
+}
+
+/* Special back card contrast for both themes */
+.flip-card-back {
+  background-color: var(--dm-accent);
+  color: #0e1a2b;
+}
+
+.flip-card-back .flip-card-title {
+  color: #0e1a2b;
+}
+
+[data-theme="light"] .flip-card-back {
+  background-color: var(--lm-accent);
+  color: #ffffff;
+}
+
+[data-theme="light"] .flip-card-back .flip-card-title {
+  color: #ffffff;
+}
+
+/* === 6. Tables === */
+
+/* Tables in dark mode */
+table {
+  background-color: var(--dm-card-bg);
+  color: var(--dm-card-text);
+}
+
+th {
+  background-color: #14233a;
+  color: #ffffff;
+}
+
+tr:nth-child(even) {
+  background-color: #0d1e30;
+}
+
+tr:hover {
+  background-color: rgba(42, 245, 255, 0.05);
+}
+
+/* Tables in light mode */
+[data-theme="light"] table {
+  background-color: var(--lm-card-bg);
+  color: var(--lm-card-text);
+}
+
+[data-theme="light"] th {
+  background-color: var(--lm-accent);
+  color: #ffffff;
+}
+
+[data-theme="light"] tr:nth-child(even) {
+  background-color: #f5f9ff;
+}
+
+[data-theme="light"] tr:hover {
+  background-color: rgba(0, 118, 255, 0.05);
+}
+
+/* Comparison table */
+.comparison-table td:first-child {
+  font-weight: 600;
+  background-color: rgba(42, 245, 255, 0.1);
+}
+
+[data-theme="light"] .comparison-table td:first-child {
+  background-color: rgba(0, 118, 255, 0.1);
+}
+
+/* === 7. Lists === */
+
+/* Custom lists */
+.custom-list li::before {
+  background-color: var(--dm-accent);
+}
+
+[data-theme="light"] .custom-list li::before {
+  background-color: var(--lm-accent);
+}
+
+/* Numbered lists */
+.numbered-list li::before {
+  background-color: var(--dm-accent);
+  color: #0e1a2b;
+}
+
+[data-theme="light"] .numbered-list li::before {
+  background-color: var(--lm-accent);
+  color: #ffffff;
+}
+
+/* === 8. Button and Badge Styles === */
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--dm-accent);
+  color: #0e1a2b;
+}
+
+.btn-primary:hover {
+  background-color: var(--dm-accent2);
+  color: #0e1a2b;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--dm-accent);
+  border: 2px solid var(--dm-accent);
+}
+
+.btn-secondary:hover {
+  background-color: var(--dm-accent);
+  color: #0e1a2b;
+}
+
+[data-theme="light"] .btn-primary {
+  background-color: var(--lm-accent);
+  color: #ffffff;
+}
+
+[data-theme="light"] .btn-primary:hover {
+  background-color: var(--lm-accent2);
+  color: #ffffff;
+}
+
+[data-theme="light"] .btn-secondary {
+  color: var(--lm-accent);
+  border: 2px solid var(--lm-accent);
+}
+
+[data-theme="light"] .btn-secondary:hover {
+  background-color: var(--lm-accent);
+  color: #ffffff;
+}
+
+/* Header Badges */
+.header-badge {
+  background-color: var(--dm-accent);
+  color: #0e1a2b;
+}
+
+[data-theme="light"] .header-badge {
+  background-color: var(--lm-accent);
+  color: #ffffff;
+}
+
+/* === 9. Quote Box === */
+.quote-box {
+  background-color: rgba(236, 240, 241, 0.1);
+  color: var(--dm-text);
+}
+
+.quote-box::before {
+  color: rgba(42, 245, 255, 0.2);
+}
+
+.quote-source {
+  color: var(--dm-accent);
+}
+
+[data-theme="light"] .quote-box {
+  background-color: rgba(236, 240, 241, 0.7);
+  color: var(--lm-text);
+}
+
+[data-theme="light"] .quote-box::before {
+  color: rgba(0, 118, 255, 0.2);
+}
+
+[data-theme="light"] .quote-source {
+  color: var(--lm-accent);
+}
+
+/* === 10. Navigation === */
+#main-nav {
+  background: rgba(14, 22, 33, 0.95);
+}
+
+.nav-logo, .nav-links a {
+  color: var(--dm-text);
+}
+
+.nav-logo:hover, .nav-links a:hover {
+  color: var(--dm-accent);
+}
+
+[data-theme="light"] #main-nav {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .nav-logo, 
+[data-theme="light"] .nav-links a {
+  color: var(--lm-text);
+}
+
+[data-theme="light"] .nav-logo:hover, 
+[data-theme="light"] .nav-links a:hover {
+  color: var(--lm-accent);
+}
+
+/* === 11. Footer === */
+footer {
+  background-color: #14233a;
+  color: var(--dm-text);
+}
+
+[data-theme="light"] footer {
+  background-color: #0e1a2b;
+  color: #ffffff;
+}
+
+/* === 12. Back to Top Button === */
+.back-to-top {
+  background-color: var(--dm-accent) !important;
+  color: #0e1a2b !important;
+}
+
+.back-to-top:hover {
+  background-color: var(--dm-accent2) !important;
+}
+
+[data-theme="light"] .back-to-top {
+  background-color: var(--lm-accent) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .back-to-top:hover {
+  background-color: var(--lm-accent2) !important;
+}
+
+/* === Tooltip === */
+.tooltip .tooltip-text {
+  background-color: var(--dm-card-bg);
+  color: var(--dm-text);
+}
+
+.tooltip .tooltip-text::after {
+  border-color: var(--dm-card-bg) transparent transparent transparent;
+}
+
+[data-theme="light"] .tooltip .tooltip-text {
+  background-color: var(--lm-card-bg);
+  color: var(--lm-text);
+}
+
+[data-theme="light"] .tooltip .tooltip-text::after {
+  border-color: var(--lm-card-bg) transparent transparent transparent;
+}
+
+/* === Modal === */
+.modal-content {
+  background-color: var(--dm-card-bg);
+  color: var(--dm-text);
+}
+
+.modal-title {
+  color: var(--dm-heading);
+}
+
+.modal-close {
+  color: var(--dm-text);
+}
+
+[data-theme="light"] .modal-content {
+  background-color: var(--lm-card-bg);
+  color: var(--lm-text);
+}
+
+[data-theme="light"] .modal-title {
+  color: var(--lm-heading);
+}
+
+[data-theme="light"] .modal-close {
+  color: var(--lm-text);
+}
+
+/* === Progress Bar === */
+.progress-fill {
+  background-color: var(--dm-accent);
+}
+
+[data-theme="light"] .progress-fill {
+  background-color: var(--lm-accent);
+}
+
+/* === Media Queries for improved contrast at various sizes === */
+@media (max-width: 768px) {
+  .nav-links {
+    background-color: var(--dm-bg);
+  }
+  
+  [data-theme="light"] .nav-links {
+    background-color: var(--lm-bg);
+  }
+}
+
+@media (max-width: 576px) {
+  .card {
+    padding: 1.25rem;
+  }
+}
+
+/* === Accordion Content Fix === */
+.accordion-content-inner {
+  background-color: var(--dm-card-bg);
+  color: var(--dm-card-text);
+}
+
+[data-theme="light"] .accordion-content-inner {
+  background-color: var(--lm-card-bg);
+  color: var(--lm-card-text);
+}
+
+/* === Fix Special Section Tabs === */
+.special-section .tab-btn {
+  color: var(--dm-text);
+}
+
+.special-section .tab-btn.active {
+  color: var(--dm-heading);
+  border-color: var(--dm-heading);
+}
+
+[data-theme="light"] .special-section .tab-btn {
+  color: var(--lm-text);
+}
+
+[data-theme="light"] .special-section .tab-btn.active {
+  color: var(--lm-accent);
+  border-color: var(--lm-accent);
+}
+
+/* === Fix Cards in Special Sections for Light Theme === */
+[data-theme="light"] .special-section {
+  background: linear-gradient(135deg, #d4e4f7 0%, #f8fafc 100%);
+}
+
+[data-theme="light"] .special-section h2,
+[data-theme="light"] .special-section h3,
+[data-theme="light"] .special-section h4 {
+  color: var(--lm-heading);
+}
+
+/* === Timeline Element Arrows === */
+.timeline-item:nth-child(odd) .timeline-content::after,
+.timeline-item:nth-child(even) .timeline-content::after {
+  background-color: var(--dm-card-bg);
+}
+
+[data-theme="light"] .timeline-item:nth-child(odd) .timeline-content::after,
+[data-theme="light"] .timeline-item:nth-child(even) .timeline-content::after {
+  background-color: var(--lm-card-bg);
+}
+
+/* === Ensuring Timeline Text Contrast === */
+.timeline-item .timeline-content p,
+.timeline-item .timeline-content li {
+  color: var(--dm-card-text);
+}
+
+[data-theme="light"] .timeline-item .timeline-content p,
+[data-theme="light"] .timeline-item .timeline-content li {
+  color: var(--lm-card-text);
+}
+
+/* === Card Text & Headings Override === */
+.card p, .card li, .card span {
+  color: var(--dm-card-text) !important;
+}
+
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
+  color: var(--dm-heading) !important;
+}
+
+[data-theme="light"] .card p, 
+[data-theme="light"] .card li, 
+[data-theme="light"] .card span {
+  color: var(--lm-card-text) !important;
+}
+
+[data-theme="light"] .card h1, 
+[data-theme="light"] .card h2, 
+[data-theme="light"] .card h3, 
+[data-theme="light"] .card h4, 
+[data-theme="light"] .card h5, 
+[data-theme="light"] .card h6 {
+  color: var(--lm-heading) !important;
+}
+
+/* === Additional Accordion Fixes === */
+.accordion-item.active .accordion-header {
+  background-color: rgba(42, 245, 255, 0.15);
+}
+
+[data-theme="light"] .accordion-item.active .accordion-header {
+  background-color: rgba(0, 118, 255, 0.15);
+}
+
+/* Force accordion content to maintain theme colors */
+.accordion-content, 
+.accordion-content * {
+  background-color: var(--dm-card-bg) !important;
+  color: var(--dm-card-text) !important;
+}
+
+[data-theme="light"] .accordion-content, 
+[data-theme="light"] .accordion-content * {
+  background-color: var(--lm-card-bg) !important;
+  color: var(--lm-card-text) !important;
+}
+
+/* Fix nested highlight boxes inside accordions */
+.accordion-content .info-block,
+.accordion-content .highlight-box,
+.accordion-content .case-study {
+  background-color: rgba(42, 245, 255, 0.05) !important;
+}
+
+[data-theme="light"] .accordion-content .info-block,
+[data-theme="light"] .accordion-content .highlight-box,
+[data-theme="light"] .accordion-content .case-study {
+  background-color: rgba(0, 118, 255, 0.05) !important;
+}
+
+/* === Theme Toggle Button Contrast === */
+.theme-toggle {
+  background: var(--dm-accent);
+  color: #0e1a2b;
+  box-shadow: 0 4px 12px rgba(0,0,0,.5);
+}
+
+[data-theme="light"] .theme-toggle {
+  background: var(--lm-accent);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+</style>
+</head>
+<body>
+<button id="themeToggle" aria-label="Toggle theme" class="theme-toggle">🌙</button>
+<div id="helix-bg"></div>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="dna-loader">
+            <div class="dna-loader-strand"></div>
+            <div class="dna-loader-strand"></div>
+            <div class="dna-loader-strand"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="main-nav">
+        <div class="container nav-container">
+            <a href="#" class="nav-logo">IPLaw × Bioinformatics</a>
+            <button class="mobile-nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#legal-mapping">Legal Mapping</a></li>
+                <li><a href="#case-analyses">Case Analyses</a></li>
+                <li><a href="#ethical-considerations">Ethical Considerations</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+        <div class="dna-animation">
+            <div class="dna-strand">
+                <!-- DNA pairs will be generated by JavaScript -->
+            </div>
+            <div class="dna-strand">
+                <!-- DNA pairs will be generated by JavaScript -->
+            </div>
+            <div class="dna-strand">
+                <!-- DNA pairs will be generated by JavaScript -->
+            </div>
+            <div class="dna-strand">
+                <!-- DNA pairs will be generated by JavaScript -->
+            </div>
+            <div class="dna-strand">
+                <!-- DNA pairs will be generated by JavaScript -->
+            </div>
+        </div>
+        <div class="header-content">
+            <h1 class="header-title">The Role of IP Law in Regulating Bioinformatics and Genetic Data</h1>
+            <p class="header-subtitle">Striking a Balance Between Public Health and Commercial Interests</p>
+            <div class="header-badge">Intellectual Property Rights</div>
+            <div class="header-badge">Bioinformatics</div>
+            <div class="header-badge">Genetic Data</div>
+            <div class="header-badge">Public Health</div>
+            <div class="author-info">
+                <p>Akshat V. Tenneti</p>
+                <p class="mb-1">LL.M. in Intellectual Property Rights and Technology Law</p>
+                <p>Jindal Global Law School</p>
+                <p>Supervisor: Ms. Shreya Shreekant</p>
+            </div>
+        </div>
+        <a href="#introduction" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </header>
+
+    <!-- Introduction Section -->
+    <section id="introduction">
+        <div class="container">
+            <div class="section-title">
+                <h2>Introduction and Conceptual Framework</h2>
+            </div>
+            
+            <div class="fade-in">
+                <p>Advances in genomics and bioinformatics have transformed both scientific research and healthcare, generating vast troves of genetic data and novel computational tools. The central problem addressed in this dissertation is how intellectual property (IP) law should regulate bioinformatics and genetic data in a manner that incentivizes innovation and commercial investment while safeguarding public health imperatives.</p>
+                
+                <div class="info-block">
+                    <i class="fas fa-balance-scale"></i>
+                    <div class="info-block-content">
+                        <h4 class="info-block-title">Core Tension</h4>
+                        <p class="mb-0">The tension between public health (which demands broad access to genetic information for research, diagnosis, and treatment) and commercial interests (which seek exclusivity and returns on investment through IP rights) is at the heart of this inquiry.</p>
+                    </div>
+                </div>
+                
+                <p>High-profile controversies highlight this tension – for example, patents on the BRCA1/2 breast cancer genes enabled a single company (Myriad Genetics) to monopolize diagnostic testing at a cost of ~$3000 per test, raising barriers for patients and researchers until the patents were invalidated.</p>
+                
+                <div class="case-study">
+                    <h4 class="case-study-title">Contemporary Example: AlphaFold</h4>
+                    <div class="case-study-meta">
+                        <span><i class="fas fa-calendar"></i> 2024</span>
+<span><i class="fas fa-trophy"></i> Nobel Prize in Chemistry</span>
+                    </div>
+                    <p>The transformative impact of computational biology was highlighted when AlphaFold, DeepMind's AI-driven protein structure predictor, won the 2024 Nobel Prize in Chemistry. It has folded over 200 million proteins, open-sourced its database with EMBL-EBI, and become a standard tool with 30,000+ citations. Used by 2M+ researchers worldwide, AlphaFold demonstrates the importance of open science, balancing accessibility with biosecurity considerations.</p>
+                </div>
+            </div>
+            
+            <div class="fade-in">
+                <h3>Components of Bioinformatics</h3>
+                <p>At its core, bioinformatics can be viewed as comprising three primary components:</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-dna"></i></div>
+                            <h4 class="card-title">Biological Sequences</h4>
+                        </div>
+                        <p class="mb-0">DNA, RNA, and protein sequences that encode biological information and functions.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-database"></i></div>
+                            <h4 class="card-title">Databases</h4>
+                        </div>
+                        <p class="mb-0">Systems that store and organize biological sequences and related information.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                            <h4 class="card-title">Software Tools</h4>
+                        </div>
+                        <p class="mb-0">Algorithms and applications used to access, analyze, and interpret genetic data.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fade-in mt-4">
+                <h3>Problem Statement</h3>
+                <p>Modern IP regimes struggle to properly regulate bioinformatics and genetic data. Patents, copyrights, database rights, and trade secrets each offer partial solutions but also create frictions. Overly broad IP protection of genetic data can stifle research collaboration and restrict access to health-related knowledge. Conversely, too little protection could dissuade private investment in genetic innovation and data curation, slowing down breakthroughs.</p>
+                
+                <div class="highlight-box">
+                    <h4>Research Question</h4>
+                    <p class="mb-0">How can IP law harmonize commercial interests and public health in the fields of bioinformatics and genetic data? In essence: how can we protect and incentivize valuable bioinformatics innovations while ensuring that critical genetic information remains accessible for the public good?</p>
+                </div>
+            </div>
+            
+            <div class="fade-in">
+                <h3>Research Questions</h3>
+                <ol class="numbered-list">
+                    <li>How do existing IP laws – particularly patent, copyright, database, and trade secret law – currently apply to bioinformatics innovations and genetic data?</li>
+                    <li>What are the tensions between IP protection & public health with regards to genetic data?</li>
+                    <li>Where have legal systems drawn the line between public and private interests in notable cases or legislation, and what guiding principles emerge from these precedents?</li>
+                    <li>What legal or policy mechanisms could better balance innovation incentives with the need for accessibility in bioinformatics?</li>
+                </ol>
+            </div>
+            
+            <div class="fade-in">
+                <h3>Key IP Concepts Relevant to the Study</h3>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h4 class="accordion-title">Trade Secrets & Contracts</h4>
+                            <i class="accordion-icon fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Companies may keep genomic data or algorithms secret to maintain a competitive edge. Proprietary databases protected by confidentiality and click-wrap user agreements are common in genomics. For example, Myriad Genetics maintained a private BRCA mutation database after losing patent protection.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h4 class="accordion-title">International Agreements</h4>
+                            <i class="accordion-icon fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Global IP treaties such as the Nagoya Protocol set baseline rules. The WTO's TRIPS Agreement mandates patent protection in different fields of technology (including biotechnology), but allows some exclusions (e.g., plants, natural discoveries).</p>
+                                <p>Other instruments like the 1992 Convention on Biological Diversity emphasize fair sharing of benefits from genetic resources, including sharing research results, royalties or joint IP rights when utilizing genetic material.</p>
+                                <p>Normative declarations (e.g., UNESCO's 1997 Universal Declaration on the Human Genome and Human Rights) assert that in its natural state "the human genome should not give rise to financial gains".</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Mapping Section -->
+    <section id="legal-mapping" class="special-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Legal Mapping and Core Tensions in IP Regulation of Genetic Data</h2>
+            </div>
+            
+            <div class="fade-in">
+                <p>The intersection of IP law and genetic data is characterized by evolving legal doctrines and high-profile disputes that frame the conceptual approach of this research. This section outlines the foundational legal framework including major cases, statutes, and policy principles.</p>
+            </div>
+            
+            <div class="fade-in">
+                <h3>Patent Law and Genetic Inventions</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">1980</span>
+                            <h4>Diamond v. Chakrabarty</h4>
+                            <p>U.S. Supreme Court allowed a patent on a human-made bacterium that would eat oil, emphasizing that Congress intended patentable subject matter to "include anything under the sun that is made by man."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">1994</span>
+                            <h4>TRIPS Agreement</h4>
+                            <p>Set the baseline by requiring WTO member countries to make patents available "for any inventions, in all fields of technology" (which includes biotechnological inventions), "provided the inventions are new, involve an inventive step, and are capable of industrial application".</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">1998</span>
+                            <h4>EU Biotechnology Directive</h4>
+                            <p>Explicitly confirms that biological material which is "isolated or produced by means of a technical process", including gene sequences, "may constitute a patentable invention, even if the structure of that element is identical to that of a natural element."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2013</span>
+                            <h4>Myriad Genetics Case</h4>
+                            <p>U.S. Supreme Court unanimously decided that "naturally occurring DNA sequences, even when isolated from the human body, are unpatentable because they are products of nature." However, complementary DNA (cDNA) remained patentable.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2015</span>
+                            <h4>D'Arcy v Myriad Genetics</h4>
+                            <p>High Court of Australia followed the U.S. lead and held that isolated human DNA is not a patentable invention under Australian law, despite prior practice to the contrary.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fade-in mt-5">
+                <h3>Key Jurisdictional Approaches</h3>
+                
+                <div class="tabs">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="tab1">United States</button>
+                        <button class="tab-btn" data-tab="tab2">European Union</button>
+                        <button class="tab-btn" data-tab="tab3">India</button>
+                    </div>
+                    
+                    <div id="tab1" class="tab-content active">
+                        <div class="card">
+                            <h4>United States Approach</h4>
+                            <p>The United States went through a significant shift during the late 20th and early 21st centuries on gene patents. For a time, the U.S. Patent and Trademark Office did grant isolated DNA sequences patents, viewing the act of isolation as human "making." By around 2005, it was estimated that around 20% of human genes had been claimed in U.S. patents.</p>
+                            <p>The watershed moment came when the Supreme Court unanimously decided in <em>Association for Molecular Pathology v. Myriad Genetics, Inc.</em> (2013) that "naturally occurring DNA sequences, even when isolated from the human body, are unpatentable because they are products of nature." However, the Court drew a line between two DNAs:</p>
+                            <ul class="custom-list">
+                                <li>Genomic DNA (naturally occurring) - unpatentable</li>
+                                <li>Complementary DNA (cDNA, synthesized in lab) - patentable</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="tab2" class="tab-content">
+                        <div class="card">
+                            <h4>European Union Approach</h4>
+                            <p>In the European Union, the legal framework was cemented by the Biotechnology Directive 98/44/EC. This Directive explicitly confirms that biological material which is "isolated or produced by means of a technical process", including gene sequences, "may constitute a patentable invention, even if the structure of that element is identical to that of a natural element."</p>
+                            <p>Under EU law, an isolated human gene is patentable if patentability criteria is met and the industrial application (utility) of that gene is disclosed in the application. The European Patent Office (EPO) applies this approach in examining applications.</p>
+                            <p>The Directive and EPC also maintain that mere discoveries are not patentable - one cannot patent the gene as it exists in the human body, only the isolated form with a specified use. Additionally, ethical limits exist: the Directive bans process patents for human cloning, modifying the human germ line or using for commercial purposes, human embryos (Article 6, morality clause).</p>
+                        </div>
+                    </div>
+                    
+                    <div id="tab3" class="tab-content">
+                        <div class="card">
+                            <h4>Indian Approach</h4>
+                            <p>India has taken a more restrictive stance consistent with protecting public health and indigenous resources. The Indian Patents Act 1970, as amended, explicitly excludes "the mere discovery of any living thing or non-living substance occurring in nature" from patentable subject matter (Section 3(c)). This means that a "naturally occurring gene" or protein isn't patentable in India, even if isolated.</p>
+                            <p>Additionally, Section 3(j) bars patents on plants and animals (including parts thereof such as seeds, varieties, and species) other than microorganisms. The combined effect is that naturally existing gene sequences are unpatentable in India, aligning with the principle that discoveries of existing biological material lack the inventive element.</p>
+                            <p>Only if a gene is significantly modified or used in a novel way – for instance, as part of a recombinant DNA construct, or a new synthetic sequence with substantial human intervention and a specific industrial application – can it potentially be patentable.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Copyright and Data Licensing Section -->
+    <section id="copyright-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Copyright and Data Licensing</h2>
+            </div>
+            
+            <div class="fade-in">
+                <p>While patent law has been the flashpoint for gene-related IP disputes, copyright and data rights form another piece of the framework. Copyright's role in protecting bioinformatics arises notably in software and databases.</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-code"></i></div>
+                            <h4 class="card-title">Software Protection</h4>
+                        </div>
+                        <p>Bioinformatics algorithms and software tools (for example, those used for DNA sequence alignment or for identifying gene variants) are typically protected by copyright as computer programs. The authors (or their employers) hold rights that can prevent unauthorized copying or distribution of the software.</p>
+                        <p class="mb-0">However, because copyright does not block independent creation and doesn't protect underlying ideas (such as the mathematical methods in the algorithm), its power in creating monopolies is limited compared to patents.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-file-contract"></i></div>
+                            <h4 class="card-title">Data-Sharing Policies</h4>
+                        </div>
+                        <p>Large aggregations of genetic data often come with terms of use or data-sharing policies that function as a form of "private ordering" of IP rights.</p>
+                        <p class="mb-0">For example, international genomic consortia or public databases sometimes require users to agree not to appropriate the data for commercial patents or to respect certain openness principles.</p>
+                    </div>
+                </div>
+                
+                <div class="case-study mt-4">
+                    <h4 class="case-study-title">NIH Genomic Data Sharing Policy</h4>
+                    <div class="case-study-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> United States</span>
+                    </div>
+                    <p>The National Institutes of Health (NIH) encourages broad sharing of genomic data and explicitly "discourages the use of patents to block access to genomic or genotype–phenotype data".</p>
+                    <p>In practice, this means research projects funded by NIH often have to release genomic datasets into open repositories (like GenBank or dbGaP) and cannot assert IP that would prevent others from using that data for further research.</p>
+                    <p class="mb-0">This policy embodies the idea that genomic data, especially when generated with public funds, should be treated as a public resource to advance science, rather than a proprietary asset.</p>
+                </div>
+            </div>
+            
+            <div class="fade-in mt-4">
+                <h3>Open Science Principles in Genomics</h3>
+                
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h4 class="flip-card-title">The Bermuda Principles (1990s)</h4>
+                            <p>These principles mandated rapid public release of Human Genome Project data, treating sequence data as a common public good to accelerate discovery.</p>
+                            <p class="mt-3"><em>Hover to see the modern implications</em></p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="flip-card-title">Modern Impact: COVID-19 Response</h4>
+                            <p>During the COVID-19 pandemic, scientists rapidly published the SARS-CoV-2 virus genome openly. Researchers deliberately chose not to patent the viral genome sequence, instead posting it to public databases, which enabled labs worldwide to immediately start building tests and vaccines.</p>
+                            <p>This instance powerfully illustrates how open access to genetic information can directly serve public health.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="mt-4">Commercial Interests vs. Open Access</h3>
+                <p>The openness ideal sometimes clashes with commercial realities. Private entities that invest heavily in sequencing or data aggregation may seek returns via exclusivity.</p>
+                
+                <div class="info-block">
+                    <i class="fas fa-lock"></i>
+                    <div class="info-block-content">
+                        <h4 class="info-block-title">Commercial Data Protection Mechanisms</h4>
+                        <ul class="custom-list mb-0">
+                            <li>Sui generis database right in the EU, which allows companies to prevent extraction of their data compilations</li>
+                            <li>Contractual restrictions - allowing academic researchers free access but forbidding commercial use or redistribution</li>
+                            <li>Technological access control - providing data access only through a web interface, keeping the bulk data hidden</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <p>These strategies effectively create a fenced garden around data, even if formal IP law (like copyright) might not directly apply to the raw data.</p>
+                
+                <div class="highlight-box">
+                    <h4>Conceptual Balance</h4>
+                    <p class="mb-0">The balance between openness and protection in bioinformatics often comes down to policy choices: institutions like NIH push towards the public health side (open data for collective benefit), whereas private firms lean towards proprietary models to recoup investment. Law and policy must mediate these approaches.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ethical Debates Section -->
+    <section id="ethical-debates" class="bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ethical & Policy Debates</h2>
+            </div>
+            
+            <div class="fade-in">
+                <p>At the nucleus of the conceptual framework are the ethical arguments about how we value genetic information.</p>
+                
+                <div class="interactive-svg-container">
+                    <svg width="100%" height="100%" viewBox="0 0 800 350" id="balance-svg">
+                        <!-- Balance Base -->
+                        <rect x="380" y="250" width="40" height="100" fill="#1a2639" />
+                        <rect x="350" y="300" width="100" height="20" fill="#1a2639" />
+                        
+                        <!-- Balance Beam -->
+                        <g class="balance-beam" id="balance-beam" transform="rotate(0, 400, 250)">
+                            <rect x="200" y="245" width="400" height="10" fill="#3498db" />
+                            
+                            <!-- Left Pan (Public Health) -->
+                            <g class="balance-pan" id="left-pan">
+                                <circle cx="220" cy="255" r="5" fill="#1a2639" />
+                                <line x1="220" y1="255" x2="220" y2="280" stroke="#1a2639" stroke-width="2" />
+                                <circle cx="220" cy="280" r="50" fill="#e74c3c" opacity="0.9" />
+                                <text x="220" y="285" class="balance-text" fill="white" font-weight="bold">Public Health</text>
+                            </g>
+                            
+                            <!-- Right Pan (Commercial Interests) -->
+                            <g class="balance-pan" id="right-pan">
+                                <circle cx="580" cy="255" r="5" fill="#1a2639" />
+                                <line x1="580" y1="255" x2="580" y2="280" stroke="#1a2639" stroke-width="2" />
+                                <circle cx="580" cy="280" r="50" fill="#16a085" opacity="0.9" />
+                                <text x="580" y="285" class="balance-text" fill="white" font-weight="bold">Commercial</text>
+                            </g>
+                            
+                            <!-- Pivot Point -->
+                            <circle cx="400" cy="250" r="5" fill="#1a2639" />
+                        </g>
+                        
+                        <!-- Slider Control -->
+                        <g id="balance-slider">
+                            <line x1="300" y1="350" x2="500" y2="350" stroke="#333" stroke-width="3" />
+                            <circle cx="400" cy="350" r="12" fill="#3498db" id="slider-handle" />
+                            <text x="300" y="375" text-anchor="middle" fill="#1a2639" font-weight="bold">Public Health</text>
+                            <text x="500" y="375" text-anchor="middle" fill="#1a2639" font-weight="bold">Commercial</text>
+                        </g>
+                    </svg>
+                </div>
+                
+                <div class="grid mt-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                            <h4 class="card-title">Commercial Innovation Argument</h4>
+                        </div>
+                        <ul class="custom-list mb-0">
+                            <li>Strong IP protection needed to incentivize innovation</li>
+                            <li>Without patents or exclusive rights, companies may not invest the massive resources needed</li>
+                            <li>Biotechnology industry relies on patent-backed investment</li>
+                            <li>Developing a new gene therapy or sequencing platform can cost hundreds of millions of dollars</li>
+                            <li>Patents eventually expire, making inventions public domain</li>
+                            <li>Patents disclose information, unlike trade secrets which remain hidden indefinitely</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-hospital-user"></i></div>
+                            <h4 class="card-title">Public Health Argument</h4>
+                        </div>
+                        <ul class="custom-list mb-0">
+                            <li>Access, equity, and collaborative scientific progress are prioritized</li>
+                            <li>Cases like Myriad show gene patents can put essential medical information behind a paywall</li>
+                            <li>Concern about "tragedy of the anticommons" - too many IP claims could gridlock innovation</li>
+                            <li>Human genome viewed as "common heritage of humanity" (UNESCO declaration)</li>
+                            <li>Open data sharing expedites disease gene identification and diagnostic development</li>
+                            <li>COVID-19 pandemic showed benefits when viral genome was openly shared</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fade-in mt-4">
+                <h3>Alternative Approaches</h3>
+                <p>Given the shortcomings of applying off-the-shelf IP regimes, there have been calls for sui generis protections or frameworks tailored to genetic resources and data.</p>
+                
+                <div class="case-study">
+                    <h4 class="case-study-title">WIPO Treaty on Genetic Resources (2024)</h4>
+                    <div class="case-study-meta">
+                        <span><i class="fas fa-globe-americas"></i> International</span>
+                    </div>
+                    <p>The new WIPO treaty of 2024 obliges patent applications to disclose the origin and seeks to enable "access and benefit-sharing (ABS)" for genetic resources, complementing the Convention on Biological Diversity's ABS principles.</p>
+                </div>
+                
+                <div class="highlight-box mt-4">
+                    <h4>The Challenge of Balance</h4>
+                    <p class="mb-0">The conceptual landscape is one of balance and boundary-setting. Cases like Myriad and policies like the EU Biotech Directive mark significant boundary lines. The challenge is how to refine these lines and possibly develop improved legal mechanisms so that intellectual property law effectively regulates bioinformatics and genetic data in a way that rewards innovation while preserving the commons of knowledge essential for public health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Analyses Section -->
+    <section id="case-analyses">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lessons from Practice—Case Analyses and Comparative Perspectives</h2>
+            </div>
+            
+            <div class="fade-in">
+                <p>As we transition from examining the theoretical legal frameworks governing intellectual property in bioinformatics, this section explores how these frameworks function in practice through landmark cases and comparative regulatory approaches. The analysis reveals both the practical consequences of existing IP regimes and potential alternative models that might better balance innovation incentives with public health imperatives.</p>
+                
+                <div class="case-study">
+                    <h4 class="case-study-title">Association for Molecular Pathology v. Myriad Genetics (2013)</h4>
+                    <div class="case-study-meta">
+                        <span><i class="fas fa-gavel"></i> U.S. Supreme Court</span>
+                        <span><i class="fas fa-calendar"></i> 2013</span>
+                    </div>
+                    <p>The dispute centered on Myriad's patents covering the BRCA1 and BRCA2 genes, mutations in which significantly increase risk for breast and ovarian cancer. Myriad's monopoly enabled them to charge approximately $3,000-$4,000 per test and prevent other laboratories from offering alternative testing services.</p>
+                    <p>In a unanimous decision, the Supreme Court distinguished between naturally occurring genetic sequences and human-created modifications, holding that "a naturally occurring DNA segment is a product of nature and not patent eligible merely because it has been isolated." However, the Court upheld the patentability of complementary DNA (cDNA) as this lab-created construct does not occur naturally.</p>
+                    <p>This nuanced ruling created what Morrison Foerster describes as a middle ground approach to genetic patentability.</p>
+                </div>
+                
+                <h3 class="mt-4">Impact of the Myriad Decision</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Immediate Effect</span>
+                            <h4>Market Response</h4>
+                            <p>Within days of the decision, many laboratories announced competing BRCA testing services at significantly lower prices. Analysis by Zhuo Chen et al. documented that the average price for BRCA testing fell substantially following the ruling as competition increased.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Strategic Shift</span>
+                            <h4>From Patents to Trade Secrets</h4>
+                            <p>For Myriad, the decision necessitated a strategic pivot toward proprietary databases and algorithmic tools for variant interpretation, demonstrating how exclusivity strategies adapt to changing legal frameworks.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Long-term Effect</span>
+                            <h4>The Proprietary Data Dilemma</h4>
+                            <p>Conley, Cook-Deegan, and Lázaro-Muñoz analyzed how Myriad shifted toward maintaining their variant database as a trade secret after losing patent protection, which they term "the proprietary data dilemma." This shift from transparent patent exclusivity to opaque trade secrecy has potential long-term implications for scientific collaboration.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Industry Impact</span>
+                            <h4>Innovation Response</h4>
+                            <p>Contrary to industry fears of decreased investment, empirical assessments indicate that patent applications for molecular diagnostics shifted toward method claims and modified approaches rather than declining overall. The decision recalibrated the boundary between unpatentable discoveries and patentable inventions in biotechnology.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fade-in mt-5">
+                <h3>Alternative Models and Collaborative Approaches</h3>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h4 class="accordion-title">Human Genome Project & The Bermuda Principles</h4>
+                            <i class="accordion-icon fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>The Human Genome Project established a precedent for open-access approaches to genetic information through the Bermuda Principles, which mandated rapid public release of sequence data. This collaborative model has evolved through contemporary initiatives such as the Global Alliance for Genomics and Health (GA4GH), which develops frameworks for responsible genomic data sharing that balance openness with privacy concerns.</p>
+                                <p>The GA4GH's Data Use Ontology and Machine Readable Consent framework represents significant technical innovations that help balance open science with appropriate controls on sensitive genetic information. These frameworks create standardized, computer-interpretable consent categories that enable automated compliance with ethical and legal requirements, potentially reducing transaction costs for data sharing while preserving necessary restrictions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h4 class="accordion-title">COVID-19 Response Models</h4>
+                            <i class="accordion-icon fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>The COVID-19 pandemic demonstrated the effectiveness of rapid and open genomic data sharing. The GISAID platform facilitated the sharing of SARS-CoV-2 genome sequences, enabling global surveillance of viral evolution while maintaining contributors' ability to pursue related innovations. As documented by Rourke et al., this model succeeded in promoting both public health responses and commercial vaccine development by creating a protected commons where sequences were accessible but contributors retained recognition rights.</p>
+                                <p>The Open COVID Pledge represents another innovative approach, with companies temporarily waiving enforcement of patents related to COVID-19 technologies to enable collaborative pandemic response. This emergency measure demonstrated the feasibility of coordinated IP sharing in public health contexts and has sparked discussion of such permanent mechanisms for genetic diagnostics.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h4 class="accordion-title">Collaborative IP Models in Biotechnology</h4>
+                            <i class="accordion-icon fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>The BioBricks Foundation's development of the BioBrick Public Agreement created a standardized legal framework for sharing synthetic biology components while preventing downstream patent thickets. Similarly, the Structural Genomics Consortium operates on a completely open-access model for protein structures, requiring all participants to keep or place their findings in the public domain, a model that has successfully attracted both academic and pharmaceutical industry participation.</p>
+                                <p>Patent pools offer another promising approach for addressing IP fragmentation in bioinformatics. The Medicines Patent Pool has expanded to include technologies beyond HIV treatments, centralizing licensing to enhance access while maintaining innovation incentives through structured royalty arrangements. These initiatives point toward possible frameworks that move beyond the binary choice between maximum exclusivity and total openness.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fade-in mt-4">
+                <h3>Comparative Jurisdictional Approaches</h3>
+                
+                <div class="table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Jurisdiction</th>
+                                <th>Approach to Gene Patents</th>
+                                <th>Key Features</th>
+                                <th>Guiding Principles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>United States</td>
+                                <td>Post-Myriad approach: naturally occurring DNA unpatentable, cDNA patentable</td>
+                                <td>
+                                    <ul class="custom-list mb-0">
+                                        <li>2019 USPTO guidance clarifying subject matter eligibility</li>
+                                        <li>Federal Circuit developments in cases like Illumina v. Ariosa (2020)</li>
+                                        <li>Method claims tied to genetic testing remain patentable when involving specific treatment steps</li>
+                                    </ul>
+                                </td>
+                                <td>Distinction between unpatentable discoveries and patentable applications</td>
+                            </tr>
+                            <tr>
+                                <td>European Union</td>
+                                <td>Permits patenting of isolated biological material when industrial application is shown</td>
+                                <td>
+                                    <ul class="custom-list mb-0">
+                                        <li>EU Biotechnology Directive allows patents on isolated genes</li>
+                                        <li>Morality exclusions for certain technologies</li>
+                                        <li>Focus on data governance through Directive on Open Data</li>
+                                    </ul>
+                                </td>
+                                <td>Balance between commercial certainty and ethical limitations</td>
+                            </tr>
+                            <tr>
+                                <td>India</td>
+                                <td>Restrictive approach: excludes naturally occurring substances from patentable subject matter</td>
+                                <td>
+                                    <ul class="custom-list mb-0">
+                                        <li>Patents Act Section 3(c) excludes discovery of natural substances</li>
+                                        <li>Section 3(j) bars patents on plants and animals</li>
+                                        <li>Section 3(d) prevents patents on new forms of known substances unless they demonstrate "enhanced efficacy"</li>
+                                        <li>Traditional Knowledge Digital Library to prevent biopiracy</li>
+                                    </ul>
+                                </td>
+                                <td>Prioritization of public health access over incentivizing private innovation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="highlight-box mt-4">
+                    <h4>Comparative Insights</h4>
+                    <p class="mb-0">These comparative approaches reveal fundamentally different prioritizations of interests. The post-Myriad U.S. model prioritizes research freedom for basic genetic information while protecting engineered constructs. The European approach provides more certainty for commercial entities through broader patentability but introduces counterbalancing through data sharing mandates. India's system most explicitly prioritizes public access over exclusivity through expanded subject matter exclusions. No single jurisdiction has developed a comprehensive solution that satisfactorily balances all competing interests.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ethical Considerations Section -->
+    <section id="ethical-considerations" class="special-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ethical and Normative Considerations for Policy Development</h2>
+            </div>
+            
+            <div class="fade-in">
+                <p>This section explores the ethical frameworks and normative considerations that should inform IP policy for bioinformatics and genetic data, moving beyond technical legal analysis to address the fundamental question of what just and ethical regulation requires.</p>
+                
+                <h3>The Unique Ethical Status of Genetic Information</h3>
+                
+                <div class="card">
+                    <p>Genetic information occupies an ethically distinctive position that complicates traditional property frameworks. Unlike conventional inventions, genetic sequences simultaneously constitute:</p>
+                    <ul class="custom-list">
+                        <li>Personal information about individuals</li>
+                        <li>Shared heritage across populations</li>
+                        <li>Scientific knowledge about biological processes</li>
+                    </ul>
+                    <p>This multidimensional character raises fundamental questions about the appropriateness of exclusive ownership models.</p>
+                    
+                    <div class="quote-box">
+                        <p>"The human genome in its natural state shall not give rise to financial gains."</p>
+                        <span class="quote-source">— UNESCO Universal Declaration on the Human Genome and Human Rights</span>
+                    </div>
+                    
+                    <p>Contemporary bioethicists increasingly conceptualize genetic information within a "stewardship" rather than "ownership" framework, where those who develop genetic knowledge hold responsibilities as caretakers rather than absolute owners.</p>
+                </div>
+            </div>
+            
+            <div class="fade-in mt-4">
+                <h3>Global Health Equity and Distributive Justice</h3>
+                
+                <div class="card">
+                    <p>The distribution of genetic innovation benefits raises important concerns of justice. As seen in the Myriad case, IP rights can create barriers to diagnostic access with direct health consequences. This dynamic is extended globally, raising ethical questions about how IP regimes influence health inequities between wealthy and resource-limited settings.</p>
+                    
+                    <div class="info-block">
+                        <i class="fas fa-balance-scale"></i>
+                        <div class="info-block-content">
+                            <h4 class="info-block-title">The "10/90 Gap"</h4>
+                            <p class="mb-0">Only 10% of global health research addresses conditions affecting 90% of the world's population. This extends to genomics research, where over 80% of participants in large-scale genomic studies are of European ancestry, creating significant blind spots in understanding genetic factors in diverse populations.</p>
+                        </div>
+                    </div>
+                    
+                    <p>Recent initiatives such as H3Africa (Human Heredity and Health in Africa) Consortium have established research networks generating African genomic data while implementing novel IP frameworks that balance local benefit-sharing with global research accessibility.</p>
+                    
+                    <p>The 2001 Doha Declaration on TRIPS and Public Health, reinforced by subsequent WTO decisions, affirmed that countries maintain the right to issue compulsory licenses to protect public health, explicitly recognizing that IP rights should not trump access to essential medicines or diagnostic tools.</p>
+                </div>
+            </div>
+            
+            <div class="fade-in mt-4">
+                <h3>Indigenous and Community Rights</h3>
+                
+                <div class="card">
+                    <p>For many indigenous communities, genetic resources and associated knowledge are viewed as collective and intergenerational assets rather than potential objects of individual ownership.</p>
+                    
+                    <div class="info-block">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="info-block-content">
+                            <h4 class="info-block-title">The Problem of "Biopiracy"</h4>
+                            <p class="mb-0">Genetic resources and traditional knowledge are sometimes appropriated without permission or benefit-sharing, representing an ongoing ethical challenge. There are fundamental conceptual differences between Western intellectual property frameworks and indigenous understandings of knowledge as communal and intergenerational.</p>
+                        </div>
+                    </div>
+                    
+                    <p>The Nagoya Protocol on Access and Benefit-sharing established principles requiring prior informed consent and mutually agreed terms for accessing genetic resources. However, implementation remains inconsistent with significant gaps between theoretical rights and practical protections.</p>
+                    
+                    <p>Bioinformatics developments further complicate traditional knowledge protection by enabling digital sequence information to be separated from physical biological materials, potentially circumventing access and benefit-sharing requirements.</p>
+                    
+                    <div class="highlight-box">
+                        <h4>The CARE Principles</h4>
+                        <p class="mb-0">The CARE Principles for Indigenous Data Governance (Collective Benefit, Authority to Control, Responsibility, Ethics) provide standards that specifically address these concerns while emphasizing indigenous peoples' rights to control how their genetic information is used and commercialized.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fade-in mt-4">
+                <h3>Emerging Ethical Challenges: Technological Convergence</h3>
+                
+                <div class="card">
+                    <p>The convergence of artificial intelligence with genomics introduces novel ethical challenges for IP frameworks. Machine learning algorithms trained on genetic datasets can now generate insights that may qualify as inventions, raising questions about appropriate attribution and ownership.</p>
+                    
+                    <div class="case-study">
+                        <h4 class="case-study-title">AlphaFold: AI Meets Genomics</h4>
+                        <div class="case-study-meta">
+                            <span><i class="fas fa-robot"></i> AI System</span>
+                            <span><i class="fas fa-calendar"></i> 2021-Present</span>
+                        </div>
+                        <p>DeepMind's AlphaFold system, which used AI to predict the three-dimensional structures of nearly all known human proteins, exemplifies these boundary-blurring innovations. The black box nature of many AI systems compounds these challenges, undermining the social bargain at patent law's core: exclusive rights in exchange for teaching society how the invention works.</p>
+                    </div>
+                    
+                    <p>The U.S. Patent and Trademark Office's 2023 guidance on AI-assisted inventions confirms that AI systems cannot qualify as inventors under current law, but allows patenting of AI-assisted innovations where humans have made significant creative contributions. This policy clarification addresses immediate concerns but leaves open deeper questions about the fundamental purpose of patent incentives in an era where machines increasingly contribute to the innovative process.</p>
+                    
+                    <h4 class="mt-3">Gene Editing and Synthetic Biology</h4>
+                    <p>Advances in gene editing technologies like CRISPR and synthetic biology raise additional ethical questions about appropriate IP boundaries. While earlier genetic technologies focused on reading or analyzing existing genetic code, today's technologies enable writing and modifying genetic sequences, blurring distinctions between discovery and invention.</p>
+                    
+                    <p>The CRISPR patent dispute between the Broad Institute and University of California highlighted how complex overlapping patent claims in foundational technologies can restrict downstream innovation and access. However, the resolution of this dispute through a licensing arrangement demonstrates one potential approach that balances exclusivity and access. The agreement established a joint licensing platform that allows non-commercial research use while preserving commercial licensing rights for the patent holders.</p>
+                </div>
+            </div>
+            
+            <div class="fade-in mt-4">
+                <h3>Towards an Integrated Ethical Framework</h3>
+                
+                <div class="card">
+                    <p>Drawing insights from diverse ethical considerations, several key principles emerge that can guide more balanced IP policy for bioinformatics and genetic data:</p>
+                    
+                    <div class="grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+                                <h4 class="card-title">Proportionality Principle</h4>
+                            </div>
+                            <p class="mb-0">Exclusive rights should be in proportion to actual innovation contribution instead of extending to discoveries of natural phenomena. This principle results from the Myriad approach of distinguishing between unpatentable natural sequences and potentially patentable engineered constructs.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-layer-group"></i></div>
+                                <h4 class="card-title">Tiered Access Principle</h4>
+                            </div>
+                            <p class="mb-0">This principle acknowledges legitimate commercial interests while ensuring that essential health applications remain accessible. This could involve differential protection levels based on application context—stronger exclusivity for non-essential applications, weaker or time-limited rights for critical diagnostics.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                                <h4 class="card-title">Benefit-sharing Principle</h4>
+                            </div>
+                            <p class="mb-0">This principle recognizes contributions from research participants, indigenous communities, and public funding. It supports mandatory contribution to data commons, reach-through benefits to communities, and recognition of collective interests in genetic resources.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-search"></i></div>
+                                <h4 class="card-title">Transparency Principle</h4>
+                            </div>
+                            <p class="mb-0">Actual scientific progress requires not just access but also understanding. This supports robust measures such as disclosure requirements, limitations on black box proprietary algorithms in healthcare contexts, and research exemptions.</p>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-users"></i></div>
+                                <h4 class="card-title">Intergenerational Responsibility</h4>
+                            </div>
+                            <p class="mb-0">This principle acknowledges that genetic heritage is not limited to current stakeholders. It supports precautionary approaches to permanent modifications and maintenance of genetic diversity as common heritage.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section id="conclusion">
+        <div class="container">
+            <div class="section-title">
+                <h2>Conclusion</h2>
+            </div>
+            
+            <div class="fade-in">
+                <h3>Synthesis of Research Insights</h3>
+                <p>The preceding sections traced the uneasy co-evolution of intellectual-property doctrines and the fast-moving sciences of genomics, bioinformatics, and synthetic biology. We mapped the current doctrinal terrain: patents, at once an engine of investment and a brake on downstream experimentation; database rights and copyright, which protect the expensive curation of datasets but can hard-fence facts; and trade-secret or contractual strategies that flourish whenever formal IP protection recedes.</p>
+                
+                <p>The Myriad case illustrated how aggressive exclusivity can chill diagnostic access yet also how firms pivot to proprietary data once sequence claims fall away. European law, by contrast, still extends patents to isolated sequences while tempering that breadth with disclosure and morality clauses, and India's Section 3(c) exclusion underscores a public-health–first model.</p>
+                
+                <p>What is needed is layered governance in which:</p>
+                <ol class="numbered-list">
+                    <li>Narrowly-tailored patents reward clearly inventive manipulation of genetic information</li>
+                    <li>Open-science pledges and data commons preserve the research substrate</li>
+                    <li>Privacy, benefit-sharing, and anti-trust rules check enclosure that would frustrate public-health goals</li>
+                </ol>
+                
+                <div class="highlight-box">
+                    <h4>Cross-cutting Insights</h4>
+                    <ol class="numbered-list mb-0">
+                        <li><strong>Separation of discovery from invention remains the most robust doctrinal fulcrum.</strong> Wherever courts draw that line clearly (as Myriad did for naturally occurring DNA; as the EU does for patent claims that fail the "specific industrial application" test), diagnostic prices fall and follow-on research accelerates without a demonstrable collapse in private R&D.</li>
+                        <li><strong>Data is becoming the decisive asset.</strong> From Myriad's post-patent pivot to trade-secret variant databases to AlphaFold's open but temporally-gated release model, competitive advantage now resides in curating, cleaning, and algorithmically interpreting sequence data rather than in owning the sequences themselves.</li>
+                        <li><strong>Ethical legitimacy is a moving target.</strong> Public-health crises (SARS-CoV-2), equity critiques (the "missing diversity" problem), and Indigenous claims to genetic resources have already pressured legislators toward hybrid solutions—e.g., compulsory-licensing triggers tied to WHO emergencies, and the disclosure/benefit-sharing obligations baked into the 2024 WIPO GR-ATK Treaty.</li>
+                    </ol>
+                </div>
+                
+                <p>These insights converge on a core proposition: a future-proof IP regime for bioinformatics is necessarily plural, conditional, and integrated with adjacent regulatory fields (privacy, insolvency, conservation).</p>
+            </div>
+            
+            <div class="fade-in mt-4">
+                <h3>Future Directions & Recommendations</h3>
+                <p>The next decade will confront lawmakers with questions that did not exist when Myriad was decided. Two recent flash-points—de-extinction inventions (e.g., the claimed resurrection of dire wolves) and the insolvency of a major consumer-genomics platform (23andMe)—expose blind spots in today's patchwork. Building on the dissertation's findings, the following recommendations aim to anticipate such shocks while preserving incentives for genuine innovation.</p>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h4 class="accordion-title">Genomic Data Fiduciaries & Insolvency "Firewalls"</h4>
+                            <i class="accordion-icon fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <div class="info-block mb-3">
+                                    <i class="fas fa-info-circle"></i>
+                                    <div class="info-block-content">
+                                        <h4 class="info-block-title">Signal Event</h4>
+                                        <p class="mb-0">23andMe's Chapter 11 petition has left 15 million customers unsure whether their permanent genetic identifiers could be sold to the highest bidder.</p>
+                                    </div>
+                                </div>
+                                
+                                <p><strong>Problem:</strong> IP law treats databases as assets; bankruptcy law treats assets as transferable unless exempted; privacy statutes offer patchy, ex post remedies.</p>
+                                
+                                <p><strong>Recommendations:</strong></p>
+                                <ol class="numbered-list">
+                                    <li><strong>Statutory "genomic data trusts."</strong> Mandate that any entity collecting DNA at scale hold raw genotypes and associated health in a purpose-bound trust whose fiduciary duty runs to data subjects and the public, not to creditors. Beneficial ownership of that trust would never vest in the estate, rendering the data non-transferable in insolvency absent affirmative, court-supervised consent.</li>
+                                    <li><strong>Compulsory escrow of interpretive algorithms.</strong> To avoid locking data into a single analytics stack, require firms above a sequencing-volume threshold to deposit annotated pipelines in escrow, to be released under open-source or FRAND-style terms if the firm ceases to operate.</li>
+                                    <li><strong>Priority exit licensing.</strong> Where transfer is unavoidable, impose a first-refusal right for non-profit biobanks or public-health authorities under cost-based terms, ensuring continuity of beneficial research uses while deterring speculative data purchases.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h4 class="accordion-title">A Sui Generis De-Extinction & Synthetic-Rescue Regime</h4>
+                            <i class="accordion-icon fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <div class="info-block mb-3">
+                                    <i class="fas fa-info-circle"></i>
+                                    <div class="info-block-content">
+                                        <h4 class="info-block-title">Signal Event</h4>
+                                        <p class="mb-0">Colossal Biosciences' announcement of three CRISPR-engineered "dire wolf" pups and the ensuing debate over patent claims on reconstructed genes.</p>
+                                    </div>
+                                </div>
+                                
+                                <p><strong>Problem:</strong> De-extinction straddles discovery (ancient DNA) and invention (synthetic sequence and cloning process). Existing patent exclusions for "products of nature" may be under-inclusive, while ABS frameworks such as Nagoya assume the prior existence of living source material.</p>
+                                
+                                <p><strong>Recommendations:</strong></p>
+                                <ol class="numbered-list">
+                                    <li><strong>Process-centric patentability with mandatory open-sequence publication.</strong> Permit claims on genuinely inventive assembly or editing processes, but require deposition of the resulting sequence in a publicly searchable registry within five years, after which sequence claims expire.</li>
+                                    <li><strong>Digital ABS license.</strong> Extend benefit-sharing obligations to digital sequence information derived from extinct species; royalties (or data-sharing quotas) should flow into a global "Synthetic Biodiversity Fund" earmarked for ecosystem restoration, aligning incentives with conservation rather than enclosure.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h4 class="accordion-title">Adaptive IP/AI Convergence Governance</h4>
+                            <i class="accordion-icon fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <div class="info-block mb-3">
+                                    <i class="fas fa-info-circle"></i>
+                                    <div class="info-block-content">
+                                        <h4 class="info-block-title">Signal Trend</h4>
+                                        <p class="mb-0">Large-language-model architectures now design proteins and small molecules at scale, collapsing the temporal gap between in silico insight and wet-lab realization.</p>
+                                    </div>
+                                </div>
+                                
+                                <p><strong>Recommendations:</strong></p>
+                                <ol class="numbered-list">
+                                    <li><strong>Mandatory algorithmic-transparency annexes</strong> for patents claiming AI-generated bioinformatic inventions—enforceable not through forced disclosure of source code (which may harbor trade secrets) but via auditable model cards, training-data provenance statements, and reproducible test suites.</li>
+                                    <li><strong>Dynamic claim scope tied to training data openness.</strong> Offer broader claim breadth or term extensions where applicants make underlying training genomic datasets FAIR (Findable, Accessible, Interoperable, Re-usable), and narrower scope where data remain proprietary.</li>
+                                    <li><strong>Human-in-the-loop inventorship tests.</strong> Codify that where a model's output constitutes the sole inventive step, the public domain is the default owner unless a human demonstrates a non-obvious, shaping contribution.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h4 class="accordion-title">Toward a Layered, Mission-Oriented Bioinformatics Commons</h4>
+                            <i class="accordion-icon fas fa-chevron-down"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-content-inner">
+                                <p>Legal architecture should move beyond binary debates (open versus proprietary) toward mission-oriented layering:</p>
+                                
+                                <ul class="custom-list">
+                                    <li><strong>Open pre-competitive layers</strong> - reference genomes, epidemiological dashboards—supported by public funding and compulsory data-sharing mandates.</li>
+                                    <li><strong>Middle layers of conditional exclusivity</strong> - validated diagnostic algorithms, clinical-grade variant databases—licensed on FRAND-plus-health-equity terms that include price caps in low- and middle-income jurisdictions.</li>
+                                </ul>
+                                
+                                <p>Operationalizing this stack will require coordinated reform across patent statutes, data-protection law, and biodiversity treaties, but its virtue is systemic resilience. Any shocks in one layer (bankruptcy, an ecological mis-fire, an AI paradigm shift) do not collapse the entire edifice.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box mt-4">
+                    <h4>Final Insight</h4>
+                    <p class="mb-0">The dissertation's journey from doctrinal mapping through empirical case studies to ethical interrogation demonstrates that intellectual property is a steering mechanism, not an end in itself. Used narrowly, it can still underwrite the costly ingenuity required to decode, edit, and deploy the genome. Used reflexively, it can privatize the informational foundations of global public health. The recommendations offered here translate that insight into practical levers. Implemented together, they conceive an IP ecosystem that is anticipatory rather than reactive, plural rather than monolithic, and ultimately aligned with a 21st-century vision of health, equity, and planetary stewardship.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>The Role of IP Law in Regulating Bioinformatics and Genetic Data</h3>
+                    <p>Striking a Balance Between Public Health and Commercial Interests</p>
+                </div>
+                
+                <div class="footer-info">
+                    <p>Akshat V. Tenneti</p>
+                    <p>LL.M. in Intellectual Property Rights and Technology Law</p>
+                    <p>Jindal Global Law School</p>
+                    <p>Supervisor: Ms. Shreya Shreekant</p>
+                </div>
+                
+                <div class="footer-copyright">
+                    <p>&copy; 2025 Akshat V. Tenneti. All rights reserved.</p>
+                    <p>Submitted in partial fulfillment of the requirements for the Master of Laws (LL.M.)</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top" id="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <!-- Modal -->
+    <div class="modal" id="caseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Case Study</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="modalCloseBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // DOM Elements
+        const mainNav = document.getElementById('main-nav');
+        const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const scrollDownBtn = document.querySelector('.scroll-down');
+        const backToTopBtn = document.getElementById('back-to-top');
+        const preloader = document.querySelector('.preloader');
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const balanceBeam = document.getElementById('balance-beam');
+        const sliderHandle = document.getElementById('slider-handle');
+        const modal = document.getElementById('caseModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                preloader.classList.add('fade');
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 800);
+            
+            // Generate DNA pairs for animation
+            generateDNAPairs();
+        });
+        
+        // Mobile Navigation
+        mobileNavToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Scroll to section
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile navigation
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Scroll Down Button
+        scrollDownBtn.addEventListener('click', () => {
+            const introSection = document.getElementById('introduction');
+            window.scrollTo({
+                top: introSection.offsetTop - 70,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Show/Hide Navigation and Back to Top Button on Scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                mainNav.classList.add('visible');
+                backToTopBtn.classList.add('visible');
+            } else {
+                mainNav.classList.remove('visible');
+                backToTopBtn.classList.remove('visible');
+            }
+            
+            // Animate timeline items and fade-in elements when they come into view
+            animateOnScroll();
+        });
+        
+        // Accordion
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            
+            header.addEventListener('click', () => {
+                // Close all other accordion items
+                accordionItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        const content = otherItem.querySelector('.accordion-content');
+                        content.style.maxHeight = null;
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+                const content = item.querySelector('.accordion-content');
+                
+                if (item.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    content.style.maxHeight = null;
+                }
+            });
+        });
+        
+        // Tabs
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and contents
+                tabBtns.forEach(tb => tb.classList.remove('active'));
+                tabContents.forEach(tc => tc.classList.remove('active'));
+                
+                // Add active class to current tab and content
+                btn.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Animate on scroll
+        function animateOnScroll() {
+            // Timeline items
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (itemTop < windowHeight * 0.8) {
+                    item.classList.add('visible');
+                }
+            });
+            
+            // Fade-in elements
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight * 0.85) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        // Generate DNA pairs for animation - Enhanced version
+        function generateDNAPairs() {
+            const dnaStrands = document.querySelectorAll('.dna-strand');
+            
+            dnaStrands.forEach((strand, strandIndex) => {
+                // Clear existing content
+                strand.innerHTML = '';
+                
+                // Number of pairs based on screen height
+                const numPairs = Math.floor(window.innerHeight / 15);
+                
+                // Set unique positions for each strand
+                const leftPosition = 10 + (strandIndex * 20) + '%';
+                strand.style.position = 'absolute';
+                strand.style.left = leftPosition;
+                strand.style.height = '100%';
+                strand.style.width = '20px';
+                
+                // Create pairs with different colors based on strand index
+                const colors = ['#16a085', '#3498db', '#9b59b6', '#e74c3c', '#f39c12'];
+                const strandColor = colors[strandIndex % colors.length];
+                
+                for (let i = 0; i < numPairs; i++) {
+                    const pair1 = document.createElement('div');
+                    pair1.className = 'dna-pair';
+                    pair1.style.top = (i * 15) + 'px';
+                    pair1.style.position = 'absolute';
+                    pair1.style.width = '20px';
+                    pair1.style.height = '8px';
+                    pair1.style.borderRadius = '4px';
+                    pair1.style.left = '0';
+                    pair1.style.backgroundColor = strandColor;
+                    pair1.style.opacity = '0.75';
+                    
+                    const pair2 = document.createElement('div');
+                    pair2.className = 'dna-pair';
+                    pair2.style.top = (i * 15) + 'px';
+                    pair2.style.position = 'absolute';
+                    pair2.style.width = '20px';
+                    pair2.style.height = '8px';
+                    pair2.style.borderRadius = '4px';
+                    pair2.style.right = '0';
+                    pair2.style.backgroundColor = strandColor;
+                    pair2.style.opacity = '0.75';
+                    
+                    strand.appendChild(pair1);
+                    strand.appendChild(pair2);
+                }
+                
+                // Add animation with different speeds for each strand
+                const speed = 20 + (strandIndex * 5);
+                strand.style.animation = `floatDNA ${speed}s linear infinite${strandIndex % 2 === 0 ? '' : ' reverse'}`;
+            });
+        }
+        
+        // Balance Beam Interaction
+        if (sliderHandle && balanceBeam) {
+            let isDragging = false;
+            
+            sliderHandle.addEventListener('mousedown', startDrag);
+            sliderHandle.addEventListener('touchstart', startDrag, { passive: true });
+            
+            function startDrag(e) {
+                isDragging = true;
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('touchmove', drag, { passive: true });
+                document.addEventListener('mouseup', stopDrag);
+                document.addEventListener('touchend', stopDrag);
+            }
+            
+            function drag(e) {
+                if (!isDragging) return;
+                
+                const sliderBounds = document.getElementById('balance-slider').getBoundingClientRect();
+                const leftBound = sliderBounds.left;
+                const rightBound = sliderBounds.right;
+                
+                let clientX;
+                if (e.type === 'touchmove') {
+                    clientX = e.touches[0].clientX;
+                } else {
+                    clientX = e.clientX;
+                }
+                
+                let newX = clientX;
+                
+                if (newX < leftBound) newX = leftBound;
+                if (newX > rightBound) newX = rightBound;
+                
+                const sliderWidth = rightBound - leftBound;
+                const percentage = (newX - leftBound) / sliderWidth;
+                
+                // Move the slider handle
+                sliderHandle.style.cx = 300 + (percentage * 200);
+                
+                // Rotate the balance beam (-20 to 20 degrees)
+                const rotation = (percentage - 0.5) * 40;
+                balanceBeam.setAttribute('transform', `rotate(${rotation}, 400, 250)`);
+            }
+            
+            function stopDrag() {
+                isDragging = false;
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('touchmove', drag);
+                document.removeEventListener('mouseup', stopDrag);
+                document.removeEventListener('touchend', stopDrag);
+            }
+            
+            // Click on the slider line to move handle
+            document.getElementById('balance-slider').addEventListener('click', (e) => {
+                const sliderBounds = document.getElementById('balance-slider').getBoundingClientRect();
+                const leftBound = sliderBounds.left;
+                const rightBound = sliderBounds.right;
+                const sliderWidth = rightBound - leftBound;
+                const percentage = (e.clientX - leftBound) / sliderWidth;
+                
+                // Move the slider handle
+                sliderHandle.setAttribute('cx', 300 + (percentage * 200));
+                
+                // Rotate the balance beam (-20 to 20 degrees)
+                const rotation = (percentage - 0.5) * 40;
+                balanceBeam.setAttribute('transform', `rotate(${rotation}, 400, 250)`);
+            });
+        }
+        
+        // Modal functionality
+        function openModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = content;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Case Study Buttons
+        document.querySelectorAll('.case-study').forEach(study => {
+            study.addEventListener('dblclick', () => {
+                const title = study.querySelector('.case-study-title').textContent;
+                const content = study.innerHTML;
+                openModal(title, content);
+            });
+        });
+        
+        // Run initial animations
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(animateOnScroll, 500);
+        });
+        
+        // Resize handler
+        window.addEventListener('resize', () => {
+            // Regenerate DNA pairs on resize
+            generateDNAPairs();
+            
+            // Update accordion content max-height
+            accordionItems.forEach(item => {
+                if (item.classList.contains('active')) {
+                    const content = item.querySelector('.accordion-content');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+    </script>
+
+<script>
+(()=>{
+  const toggle = document.getElementById('themeToggle');
+  const pref = localStorage.getItem('theme') || 'dark';
+  document.body.dataset.theme=pref;
+  toggle.addEventListener('click',()=>{
+    const newTheme=document.body.dataset.theme==='dark'?'light':'dark';
+    document.body.dataset.theme=newTheme;
+    localStorage.setItem('theme',newTheme);
+  });
+})();
+</script>
+
+
+<script>
+(()=>{
+
+  const toggleBtn=document.getElementById('themeToggle');
+  const body=document.body;
+  const pref=localStorage.getItem('theme')||'dark';
+  body.dataset.theme=pref;
+  toggleBtn.textContent=pref==='dark'?'🌙':'☀️';
+
+  toggleBtn.addEventListener('click',()=>{
+    const newTheme=body.dataset.theme==='dark'?'light':'dark';
+    body.dataset.theme=newTheme;
+    localStorage.setItem('theme',newTheme);
+    toggleBtn.textContent=newTheme==='dark'?'🌙':'☀️';
+  });
+
+  /* parallax helix */
+  const helix=document.getElementById('helix-bg');
+  const updateHelix=()=>{
+    const y=window.scrollY;
+    helix.style.transform=`translateY(${y*0.3}px) rotate(${y*0.05}deg)`;
+    requestAnimationFrame(updateHelix);
+  };
+  requestAnimationFrame(updateHelix);
+
+})();
+</script>
+
+
+<script>
+(()=>{
+
+  const toggle=document.getElementById('themeToggle');
+  const doc=document.documentElement;
+
+  function applyTheme(t){
+    doc.dataset.theme=t;
+    toggle.textContent=t==='dark'?'🌙':'☀️';
+  }
+
+  let theme=localStorage.getItem('theme');
+  if(!theme){
+    theme=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+  }
+  applyTheme(theme);
+
+  toggle.addEventListener('click',()=>{
+    theme=theme==='dark'?'light':'dark';
+    localStorage.setItem('theme',theme);
+    applyTheme(theme);
+  });
+
+  /* Helix parallax & loop */
+  const helix=document.getElementById('helix-bg');
+  const bgHeight=800; // matches background-size Y
+  const animate=()=>{
+    const y=window.scrollY*0.3;
+    helix.style.backgroundPosition=`center ${y%bgHeight}px`;
+    helix.style.transform=`rotate(${(window.scrollY*0.05)%360}deg)`;
+    requestAnimationFrame(animate);
+  };
+  requestAnimationFrame(animate);
+
+})();
+</script>
+
+
+<script>
+(()=>{
+ const toggle=document.getElementById('themeToggle');
+ const root=document.body; // apply attribute to BODY
+ 
+ function apply(theme){
+   root.setAttribute('data-theme',theme);
+   toggle.textContent = theme==='dark'?'🌙':'☀️';
+ }
+ let theme=localStorage.getItem('theme');
+ if(!theme){
+   theme=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+ }
+ apply(theme);
+ toggle.addEventListener('click', ()=>{
+   theme=theme==='dark'?'light':'dark';
+   localStorage.setItem('theme',theme);
+   apply(theme);
+ });
+
+ /* improved helix styling */
+ const helix=document.getElementById('helix-bg');
+ helix.style.opacity='0.08';
+ helix.style.filter='hue-rotate(0deg)';
+ let lastY=0;
+ function animate(){
+   const y=window.scrollY;
+   helix.style.backgroundPosition=`center ${(y*0.3)%800}px`;
+   helix.style.transform=`rotate(${(y*0.04)%360}deg)`;
+   helix.style.filter=`hue-rotate(${(y*0.05)%360}deg)`;
+   requestAnimationFrame(animate);
+ }
+ animate();
+})();
+</script>
+
+</body>
+</html>
