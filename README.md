@@ -1,0 +1,1 @@
+This would be a part of the Pages that I shall create (read: vibe-code) to supplment my LLM (Masters in Law) Dissertation titled - THE ROLE OF IP LAW IN REGULATING BIOINFORMATICS AND GENETIC DATA: STRIKING A BALANCE BETWEEN PUBLIC HEALTH AND COMMERCIAL INTERESTS.
